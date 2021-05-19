@@ -1,8 +1,8 @@
 class UserRecord():
 
     def __init__(self, **kwargs):
-        self.call_id = kwargs['id']
-        self.origin = kwargs['name']
-        self.destination = kwargs['email']
-        self.start = kwargs['password']
-        self.end = kwargs['age']
+        self.id = kwargs['id']
+        self.name = kwargs['name']
+        self.email = kwargs['email']
+        self.password = kwargs['password']
+        self.age = kwargs['age']
