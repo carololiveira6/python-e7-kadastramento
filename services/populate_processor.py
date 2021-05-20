@@ -9,8 +9,9 @@ class UserService():
     @staticmethod
     def list_all(DATABASE_PATH):
 
-        with open(DATABASE_PATH) as repository:
-            reader = csv.DictReader(repository)
+        with open(DATABASE_PATH) as file:
+            reader = csv.DictReader(file)
+            
             return list(reader)
 
     @staticmethod
