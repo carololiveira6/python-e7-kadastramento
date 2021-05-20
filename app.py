@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
 from services.populate_processor import UserService
-from services.create_processor import UserRecord
 from database import DATABASE_PATH
 
 app = Flask(__name__)
