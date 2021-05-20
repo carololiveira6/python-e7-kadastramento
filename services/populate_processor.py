@@ -33,7 +33,7 @@ class UserService():
         # return sorted(id_list)[-1] + 1 if id_list != [] else 1
 
     @staticmethod
-    def create(DATABASE_PATH ,**kwargs):
+    def create(DATABASE_PATH, **kwargs):
 
         if not exists(DATABASE_PATH) or os.stat(DATABASE_PATH).st_size == 0:
 
@@ -52,12 +52,12 @@ class UserService():
             kwargs['id'] = my_id
             if file.tell() == 0:
                 writer.writeheader()
-            if UserService.verify_email_exists():
-                return '', 422
+            if UserService.verify_email_exists(DATABASE_PATH, **kwargs):
+                return ('', 422)
 
             writer.writerow(kwargs) 
                 
-        return kwargs, 201
+        return (kwargs, 201)
 
     @staticmethod
     def verify_email_exists(DATABASE_PATH,**kwargs):
