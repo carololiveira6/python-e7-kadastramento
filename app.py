@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from services.populate_processor import UserService
 from database import DATABASE_PATH
-from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 CORS(app)
@@ -10,24 +9,19 @@ CORS(app)
 @app.route('/signup', methods=['POST'])
 def signup():
     
-    name = request.args.get('name')
-    email = request.args.get('email')
-    password = request.args.get('password')
-    age = request.args.get('age')
+    data = request.get_json()
 
-    new_user = UserService.create(DATABASE_PATH,
-        name=name,
-        email=email,
-        password=password,
-        # password=generate_password_hash(
-        #     password, method='pbkdf2:sha512'),
-        age=age
-        )
+    new_user = UserService.create(DATABASE_PATH, **data)
 
-    return jsonify(new_user)
+    return new_user
 
 @app.route('/login', methods=['POST'])
 def login():
+
+    # email = request.args.get('email')
+    # password = request.args.get('password')
+
+
    pass
 
 @app.route('/profile/<int:user_id>', methods=['PATCH'])

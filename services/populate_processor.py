@@ -50,12 +50,15 @@ class UserService():
         with open(DATABASE_PATH, 'a') as file:
             writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
             kwargs['id'] = my_id
+            print(kwargs)
             if file.tell() == 0:
                 writer.writeheader()
             if UserService.verify_email_exists(DATABASE_PATH, **kwargs):
                 return ('', 422)
 
-            writer.writerow(kwargs) 
+            writer.writerow(kwargs)
+
+            kwargs.pop('password')
                 
         return (kwargs, 201)
 
