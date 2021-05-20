@@ -1,7 +1,6 @@
 from database import DATABASE_PATH
 import csv, os
 from os.path import exists
-from flask import Flask, jsonify, request
 
 FIELDNAMES = ['id', 'name', 'email', 'password', 'age']
 
