@@ -27,7 +27,7 @@ def login():
     csv_users = UserService.list_all(DATABASE_PATH)
     for user in csv_users:
         if user['email'] == data['email']:
-            result = user.pop('password')
+            user.pop('password')
 
             return user
 
@@ -46,9 +46,9 @@ def update_user(user_id):
                 writer.writeheader()
                 writer.writerows(csv_users)
 
-    result = user.pop('password')
-
-    return csv_users, 201
+            user.pop('password')
+    
+        return user, 201
 
 @app.route('/profile/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -77,11 +77,14 @@ def all_users():
 
     if not exists(DATABASE_PATH) or os.stat(DATABASE_PATH).st_size == 0:
 
-        return 'NO CONTENT'
+        return 'NO CONTENT', 204
 
     with open(DATABASE_PATH, 'r') as file:
         reader = csv.DictReader(file)
         for user in reader:
+            user.pop('password')
             users.append(user)
+            
+            
 
-    return users, 201
+    return jsonify(users), 201
