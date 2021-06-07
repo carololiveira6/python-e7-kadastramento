@@ -48,7 +48,7 @@ def update_user(user_id):
 
             user.pop('password')
     
-        return user, 201
+            return user, 201
 
 @app.route('/profile/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
